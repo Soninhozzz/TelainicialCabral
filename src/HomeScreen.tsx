@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, StatusBar, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// Telas de Conteúdo (Simples, para demonstração)
+
 const DiarioScreen = () => (
     <View style={styles.pageContainer}>
         <Text style={styles.pageTitle}>Diário do Herói</Text>
