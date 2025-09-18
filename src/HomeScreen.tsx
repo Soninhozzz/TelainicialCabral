@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, StatusBar, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
 const DiarioScreen = () => (
     <View style={styles.pageContainer}>
         <Text style={styles.pageTitle}>Diário do Herói</Text>
@@ -21,8 +20,7 @@ const MeditacoesScreen = () => (
     </View>
 );
 
-
-const Dashboard = () => {
+const Dashboard = ({ navigateToDiary }: { navigateToDiary: () => void }) => {
     return (
         <ScrollView style={styles.dashboardContainer}>
             <Text style={styles.welcomeTitle}>Olá, [Nome do Herói]!</Text>
@@ -47,7 +45,7 @@ const Dashboard = () => {
                  <View>
                     <Icon name="alarm" size={20} color="#FFF" />
                     <Text style={styles.cardText}>8h15 de sono</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={navigateToDiary}>
                        <Text style={styles.cardLink}>Ver detalhes no diário &gt;</Text>
                     </TouchableOpacity>
                  </View>
@@ -66,7 +64,6 @@ const Dashboard = () => {
     );
 };
 
-
 const HomeScreen = () => {
   const [activeScreen, setActiveScreen] = useState('Dashboard');
 
@@ -79,7 +76,7 @@ const HomeScreen = () => {
       case 'Meditacoes':
         return <MeditacoesScreen />;
       default:
-        return <Dashboard />;
+        return <Dashboard navigateToDiary={() => setActiveScreen('Diario')} />;
     }
   };
 
@@ -92,6 +89,9 @@ const HomeScreen = () => {
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navButton} onPress={() => setActiveScreen('Dashboard')}>
           <Icon name="shield-home" size={30} color={activeScreen === 'Dashboard' ? '#FFFFFF' : '#c5a8ff'} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navButton} onPress={() => setActiveScreen('Diario')}>
+          <Icon name="notebook-edit-outline" size={30} color={activeScreen === 'Diario' ? '#FFFFFF' : '#c5a8ff'} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.navButton} onPress={() => setActiveScreen('Artigos')}>
           <Icon name="book-open-page-variant" size={30} color={activeScreen === 'Artigos' ? '#FFFFFF' : '#c5a8ff'} />
